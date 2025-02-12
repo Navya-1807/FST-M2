@@ -1,0 +1,14 @@
+DROP TABLE dialogues;
+CREATE TABLE dialogues (
+    character_name STRING,
+    dialogue STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+LOAD DATA LOCAL INPATH '/root/inputs/episodeIV_dialogues.txt' INTO TABLE dialogues;
+
+SELECT COUNT(*) AS num_dialogues_with_luke
+FROM dialogues
+WHERE LOWER(dialogue) RLIKE '\\bluke\\b';

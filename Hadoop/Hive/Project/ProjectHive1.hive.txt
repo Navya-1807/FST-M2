@@ -1,0 +1,14 @@
+DROP TABLE dialogues;
+CREATE TABLE dialogues (
+    character_name STRING,
+    dialogue STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+LOAD DATA LOCAL INPATH '/root/inputs' INTO TABLE dialogues;
+SELECT character_name, COUNT(*) AS dialogue_count
+FROM dialogues
+GROUP BY character_name
+ORDER BY dialogue_count DESC;
